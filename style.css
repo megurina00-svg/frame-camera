@@ -280,6 +280,29 @@ html, body {
   max-width: 280px;
 }
 
+.ios-save-hint {
+  background: #fff8e6;
+  border: 1.5px solid #f0c040;
+  border-radius: 10px;
+  padding: 14px 18px;
+  width: 100%;
+  max-width: 340px;
+  text-align: center;
+}
+.ios-save-hint.hidden { display: none; }
+
+.ios-save-hint-title {
+  font-size: 14px;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+.ios-save-hint-body {
+  font-size: 13px;
+  color: var(--color-text-light);
+  line-height: 1.7;
+}
+
 .preview-controls {
   display: flex;
   flex-direction: column;

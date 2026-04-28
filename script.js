@@ -198,25 +198,36 @@ function drawVideoCover(ctx, videoEl, targetW, targetH) {
 
 /* ══════════════════════════════
    保存
+   優先順位：
+   1. Web Share API（iOS15+ / Android）→ ネイティブ共有シート
+   2. <a download>（Android Chrome等）
+   3. フォールバック：プレビュー画像を長押し案内
 ══════════════════════════════ */
 async function saveImage() {
   if (!compositeDataUrl) return;
 
-  const blob    = dataUrlToBlob(compositeDataUrl);
-  const blobUrl = URL.createObjectURL(blob);
+  const blob = dataUrlToBlob(compositeDataUrl);
 
+  // ① Web Share API（ファイル共有対応）
+  if (navigator.share && navigator.canShare) {
+    const file = new File([blob], FILE_NAME, { type: 'image/png' });
+    if (navigator.canShare({ files: [file] })) {
+      try {
+        await navigator.share({ files: [file] });
+        return;
+      } catch (e) {
+        if (e.name === 'AbortError') return; // ユーザーがキャンセル
+        // エラーの場合は次の方法へ
+      }
+    }
+  }
+
+  // ② <a download>（Android Chrome等）
   const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent)
              || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
 
-  if (isIOS) {
-    // iOSは <a download> が効かないため、新しいタブで開いて長押し保存を案内
-    window.open(blobUrl, '_blank');
-    setTimeout(() => {
-      URL.revokeObjectURL(blobUrl);
-      alert('開いた画像を長押しして「写真に追加」を選ぶと保存できます。');
-    }, 800);
-  } else {
-    // Android Chrome等：<a download> で直接保存
+  if (!isIOS) {
+    const blobUrl = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href     = blobUrl;
     a.download = FILE_NAME;
@@ -224,6 +235,18 @@ async function saveImage() {
     a.click();
     document.body.removeChild(a);
     setTimeout(() => URL.revokeObjectURL(blobUrl), 1500);
+    return;
+  }
+
+  // ③ iOS フォールバック：プレビュー画像を長押し案内
+  showSaveHintIOS();
+}
+
+function showSaveHintIOS() {
+  const hint = document.getElementById('ios-save-hint');
+  if (hint) {
+    hint.classList.remove('hidden');
+    hint.scrollIntoView({ behavior: 'smooth', block: 'center' });
   }
 }
 
