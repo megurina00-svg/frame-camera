@@ -100,8 +100,9 @@ html, body {
 #screen-camera {
   background: #000;
   overflow: hidden;
-  height: 100dvh;
   height: 100vh;
+  height: 100dvh;
+  height: 100svh; /* iOS Safari: excludes browser chrome */
   min-height: unset;
 }
 
@@ -124,11 +125,10 @@ html, body {
 /* Force 4:5 crop — must match canvas output ratio */
 .camera-view {
   position: relative;
-  /* Fit 4:5 in available area */
   aspect-ratio: 4 / 5;
-  height: 100%;
+  /* max-height/max-width: iOS Safari resolves these correctly inside flex */
+  max-height: 100%;
   max-width: 100%;
-  /* When height fills wrapper, width = height * 4/5 */
   overflow: hidden;
   background: #111;
 }
@@ -136,8 +136,8 @@ html, body {
 /* Fallback for older browsers without aspect-ratio */
 @supports not (aspect-ratio: 4/5) {
   .camera-view {
-    width: calc((100dvh - var(--controls-height)) * 0.8);
-    height: calc(100dvh - var(--controls-height));
+    width: calc((100svh - var(--controls-height) - 85px) * 0.8);
+    height: calc(100svh - var(--controls-height) - 85px);
   }
 }
 
