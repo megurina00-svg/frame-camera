@@ -24,27 +24,23 @@ html, body {
   font-size: 15px;
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
-  overflow: hidden; /* prevent scroll during camera */
 }
 
 /* ── Screen system ── */
 .screen {
   display: none;
-  min-height: 100dvh;
-  min-height: 100vh;
 }
 .screen.active {
   display: flex;
   flex-direction: column;
+  min-height: 100dvh;
+  min-height: 100vh;
 }
 
 
 /* ══════════════════════════════
    トップ画面
 ══════════════════════════════ */
-#screen-top {
-  overflow-y: auto;
-}
 
 .top-content {
   flex: 1;
@@ -99,17 +95,20 @@ html, body {
 
 
 /* ══════════════════════════════
-   撮影画面
+   撮影画面（スクロール禁止はここだけ）
 ══════════════════════════════ */
 #screen-camera {
   background: #000;
+  overflow: hidden;
+  height: 100dvh;
+  height: 100vh;
+  min-height: unset;
 }
 
 .camera-container {
   display: flex;
   flex-direction: column;
-  height: 100dvh;
-  height: 100vh;
+  height: 100%;
   background: #000;
 }
 
@@ -236,9 +235,6 @@ html, body {
 /* ══════════════════════════════
    プレビュー画面
 ══════════════════════════════ */
-#screen-preview {
-  overflow-y: auto;
-}
 
 .preview-content {
   flex: 1;
