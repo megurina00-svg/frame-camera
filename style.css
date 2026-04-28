@@ -272,35 +272,65 @@ html, body {
   display: block;
 }
 
-.save-hint {
+/* 長押し案内バナー */
+.save-instruction {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: #fff8e6;
+  border: 1.5px solid #f0c040;
+  border-radius: 10px;
+  padding: 12px 20px;
+  width: 100%;
+  max-width: 340px;
+}
+
+.save-instruction-icon {
+  font-size: 22px;
+  animation: bounce 1.2s ease-in-out infinite;
+}
+
+.save-instruction-text {
+  font-size: 15px;
+  color: var(--color-text);
+}
+
+.save-instruction-text strong {
+  font-weight: 700;
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(4px); }
+}
+
+/* 画像の上のバッジ */
+.preview-image-wrap {
+  position: relative;
+}
+
+.preview-image-badge {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0,0,0,0.55);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 5px 14px;
+  border-radius: 20px;
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+.save-hint-sub {
   font-size: 12px;
   color: var(--color-text-light);
   text-align: center;
   line-height: 1.7;
   max-width: 280px;
-}
-
-.ios-save-hint {
-  background: #fff8e6;
-  border: 1.5px solid #f0c040;
-  border-radius: 10px;
-  padding: 14px 18px;
-  width: 100%;
-  max-width: 340px;
-  text-align: center;
-}
-.ios-save-hint.hidden { display: none; }
-
-.ios-save-hint-title {
-  font-size: 14px;
-  font-weight: 700;
-  margin-bottom: 6px;
-}
-
-.ios-save-hint-body {
-  font-size: 13px;
-  color: var(--color-text-light);
-  line-height: 1.7;
 }
 
 .preview-controls {

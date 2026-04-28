@@ -55,18 +55,22 @@
   <div id="screen-preview" class="screen">
     <div class="preview-content">
       <h2 class="preview-title">できました！</h2>
+
+      <div class="save-instruction">
+        <span class="save-instruction-icon">👇</span>
+        <span class="save-instruction-text">写真を<strong>長押し</strong>して保存</span>
+      </div>
+
       <div class="preview-image-wrap">
         <img id="preview-image" alt="撮影した写真" class="preview-image">
+        <div class="preview-image-badge">長押しで保存</div>
       </div>
 
-      <!-- iOS長押し案内（Web Share APIが使えない場合に表示） -->
-      <div id="ios-save-hint" class="ios-save-hint hidden">
-        <p class="ios-save-hint-title">📸 画像を長押しして保存してください</p>
-        <p class="ios-save-hint-body">上の写真を長押し →「写真に追加」を選ぶと<br>カメラロールに保存されます。</p>
-      </div>
+      <p class="save-hint-sub">
+        長押し →「写真に追加」を選ぶとカメラロールに保存されます
+      </p>
 
       <div class="preview-controls">
-        <button id="btn-save" class="btn btn-primary">保存する</button>
         <button id="btn-retake" class="btn btn-secondary">撮り直す</button>
         <button id="btn-top" class="btn btn-ghost">トップへ戻る</button>
       </div>
