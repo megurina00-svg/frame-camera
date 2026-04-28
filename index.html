@@ -29,6 +29,22 @@
   <!-- ── 撮影画面 ── -->
   <div id="screen-camera" class="screen">
     <div class="camera-container">
+      <!-- フレーム選択バー -->
+      <div class="frame-selector" id="frame-selector">
+        <button class="frame-thumb active" data-frame="assets/frame.png"  aria-label="フレーム1">
+          <img src="assets/frame.png"  alt="">
+        </button>
+        <button class="frame-thumb"        data-frame="assets/frame2.png" aria-label="フレーム2">
+          <img src="assets/frame2.png" alt="">
+        </button>
+        <button class="frame-thumb"        data-frame="assets/frame3.png" aria-label="フレーム3">
+          <img src="assets/frame3.png" alt="">
+        </button>
+        <button class="frame-thumb"        data-frame="assets/frame4.png" aria-label="フレーム4">
+          <img src="assets/frame4.png" alt="">
+        </button>
+      </div>
+
       <div class="camera-view-wrapper">
         <div class="camera-view">
           <video id="video" autoplay playsinline muted></video>

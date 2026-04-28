@@ -10,6 +10,9 @@ const FILE_NAME  = 'ajinomotalk-frame-photo.png';
 let mediaStream      = null;
 let compositeDataUrl = null;
 
+/* ── 選択中フレームパス ── */
+let currentFrameSrc = FRAME_SRC;
+
 /* ── フレーム画像（先読み） ── */
 const frameImage = new Image();
 frameImage.src = FRAME_SRC;
@@ -42,6 +45,25 @@ document.getElementById('btn-capture')   .addEventListener('click', capture);
 document.getElementById('btn-retake')    .addEventListener('click', retake);
 document.getElementById('btn-top')       .addEventListener('click', goTop);
 document.getElementById('btn-error-back').addEventListener('click', goTop);
+
+/* フレームサムネイル選択 */
+document.getElementById('frame-selector').addEventListener('click', e => {
+  const thumb = e.target.closest('.frame-thumb');
+  if (!thumb) return;
+
+  document.querySelectorAll('.frame-thumb').forEach(t => t.classList.remove('active'));
+  thumb.classList.add('active');
+
+  const src = thumb.dataset.frame;
+  currentFrameSrc = src;
+
+  /* オーバーレイ切り替え */
+  const overlay = document.getElementById('frame-overlay');
+  overlay.src = src;
+
+  /* frameImage を更新（合成用） */
+  frameImage.src = src;
+});
 
 /* ══════════════════════════════
    カメラ起動
