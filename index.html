@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <meta name="theme-color" content="#ffffff">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <title>味のもト〜ク フレームフォト</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ── トップ画面 ── -->
+  <div id="screen-top" class="screen active">
+    <div class="top-content">
+      <div class="top-frame-wrap">
+        <img src="assets/frame.png" alt="フレームプレビュー" class="top-frame-preview">
+      </div>
+      <h1 class="title">味のもト〜ク<br>フレームフォト</h1>
+      <p class="description">オリジナルフレームで<br>記念写真を撮影できます。</p>
+      <p class="privacy-note">
+        📷 撮影した写真は、お使いの端末内で処理されます。<br>
+        運営側には送信されません。
+      </p>
+      <button id="btn-start" class="btn btn-primary">撮影をはじめる</button>
+    </div>
+  </div>
+
+  <!-- ── 撮影画面 ── -->
+  <div id="screen-camera" class="screen">
+    <div class="camera-container">
+      <div class="camera-view-wrapper">
+        <div class="camera-view">
+          <video id="video" autoplay playsinline muted></video>
+          <img id="frame-overlay" src="assets/frame.png" alt="" class="frame-overlay" aria-hidden="true">
+        </div>
+      </div>
+      <div class="camera-controls">
+        <button id="btn-back" class="btn btn-icon" aria-label="戻る">
+          <span class="icon-back">←</span>
+          <span class="icon-label">戻る</span>
+        </button>
+        <div class="capture-wrap">
+          <button id="btn-capture" class="btn btn-capture" aria-label="撮影する">
+            <span class="capture-inner"></span>
+          </button>
+          <span class="capture-label">ここを押す</span>
+        </div>
+        <div class="camera-controls-spacer"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── プレビュー画面 ── -->
+  <div id="screen-preview" class="screen">
+    <div class="preview-content">
+      <h2 class="preview-title">できました！</h2>
+      <div class="preview-image-wrap">
+        <img id="preview-image" alt="撮影した写真" class="preview-image">
+      </div>
+      <p class="save-hint">
+        保存できない場合は、画像を長押しして保存してください。
+      </p>
+      <div class="preview-controls">
+        <button id="btn-save" class="btn btn-primary">保存する</button>
+        <button id="btn-retake" class="btn btn-secondary">撮り直す</button>
+        <button id="btn-top" class="btn btn-ghost">トップへ戻る</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── エラー画面 ── -->
+  <div id="screen-error" class="screen">
+    <div class="error-content">
+      <div class="error-icon">⚠️</div>
+      <h2 class="error-title">カメラを起動できませんでした</h2>
+      <p id="error-message" class="error-message"></p>
+      <div class="error-guide">
+        <p class="error-guide-heading">以下をお試しください</p>
+        <ul>
+          <li>SafariまたはChromeで開き直してください</li>
+          <li>カメラの使用を許可してください</li>
+          <li>ブラウザのアドレスバー横のアイコンからカメラのアクセスを確認してください</li>
+        </ul>
+      </div>
+      <button id="btn-error-back" class="btn btn-secondary">トップへ戻る</button>
+    </div>
+  </div>
+
+  <!-- ── 合成中オーバーレイ ── -->
+  <div id="processing-overlay" class="processing-overlay hidden" aria-live="polite">
+    <div class="processing-inner">
+      <div class="spinner" aria-hidden="true"></div>
+      <p>作成中です…</p>
+    </div>
+  </div>
+
+  <!-- 合成用Canvas（非表示） -->
+  <canvas id="canvas" style="display:none;" aria-hidden="true"></canvas>
+
+  <script src="script.js"></script>
+</body>
+</html>
